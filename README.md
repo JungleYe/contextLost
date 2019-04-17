@@ -13,7 +13,7 @@
   5. 在只透传spanContext的时候，还原成jaeger.SpanContext时，失败了。且有错误信息：opentracing.SpanContext is jaeger.SpanContext ,not jaeger.SpanContext(types from different packages)
 
 ##### 问题的原因：
-1. 在执行reflect.call的时候，还是使用的rpc框架层的代码，opentracing的目录为："github.com/opentracing/opentracing-go"，其实际找到的时候是rpc目录的rpc/vendor/github....
-2. 而业务代码跟rpc框架在不同的src下面，业务controller中直接调用opentracing的方法时是从 business/vendor/github.....中找的。
+1. 在执行reflect.call的时候，还是使用的rpc框架层的代码，opentracing的目录为："github.com/opentracing/opentracing-go"，其实际找到的时候是rpc目录的`rpc/vendor/github`....
+2. 而业务代码跟rpc框架在不同的src下面，业务controller中直接调用opentracing的方法时是从 `business/vendor/github`.....中找的。
 3. 也就是，通过context传递了A包的某对象，通过B包的某类型来接收。接收到的就是nil。
-##### 根本问题在于：types from different packages
+##### 根本问题在于：types from different packages 从ctx接收span的时候换成了另外一个包中的opentracing
