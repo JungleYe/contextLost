@@ -15,6 +15,7 @@ func main(){
 
 //通过context来解析
 func Pit(ctx context.Context){
+	//使用foo.CK接收就会有异常。
 	v := ctx.Value(foo.CK)
 	re,ok := v.(foo.Bif)
 	//v := ctx.Value(bar.CK)
