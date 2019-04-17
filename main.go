@@ -15,10 +15,10 @@ func main(){
 
 //通过context来解析
 func Pit(ctx context.Context){
-	//v := ctx.Value(foo.CK)
-	//re,ok := v.(foo.Bif)
-	v := ctx.Value(bar.CK)
-	re,ok := v.(bar.Bif)
+	v := ctx.Value(foo.CK)
+	re,ok := v.(foo.Bif)
+	//v := ctx.Value(bar.CK)
+	//re,ok := v.(bar.Bif)
 	if ok{
 		re.PrintB()
 	}
